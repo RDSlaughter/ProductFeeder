@@ -1,6 +1,7 @@
 <?php
 
 class JsonFeeder implements Feeder {
+    
     public function getFeed($productData) {
         return json_encode($productData,JSON_PRETTY_PRINT);
     }
@@ -8,5 +9,3 @@ class JsonFeeder implements Feeder {
         return "json";
     }
 }
-
-?>

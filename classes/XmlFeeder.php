@@ -1,15 +1,15 @@
 <?php
 
 class XmlFeeder implements Feeder {
+    
     public function getFeed($productData) {
         $xml = new SimpleXMLElement('<products/>');
 
         foreach ($productData as $product) {
             $productXml = $xml->addChild('product');
-            $productXml->addChild('id', $product['id']);
-            $productXml->addChild('name', $product['name']);
-            $productXml->addChild('price', $product['price']);
-            $productXml->addChild('category', $product['category']);
+            foreach($product as $key => $value){
+            $productXml->addChild($key, $product[$key]);
+            }
         }
 
         return $xml->asXML();
@@ -18,5 +18,3 @@ class XmlFeeder implements Feeder {
         return "xml";
     }
 }
-
-?>

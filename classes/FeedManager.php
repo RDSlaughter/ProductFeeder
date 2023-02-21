@@ -6,6 +6,7 @@ require_once 'XmlFeeder.php';
 require_once 'JsonFeeder.php';
 
 class FeedManager {
+
     private $feederClass;
 
     public function __construct($feederClass) {
@@ -17,5 +18,3 @@ class FeedManager {
         return $reflector->newInstance();
     }
 }
-
-?>

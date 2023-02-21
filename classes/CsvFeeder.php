@@ -1,17 +1,22 @@
 <?php
 
 class CsvFeeder implements Feeder {
+    
     public function getFeed($productData) {
-        $headers = array('id', 'name', 'price', 'category');
+
+        $headers = array();
+        foreach (array_keys($productData[0]) as $key => $value) {
+            $headers[] = $value;
+        }
+
         $lines = array();
 
         foreach ($productData as $product) {
-            $lines[] = array(
-                $product['id'],
-                $product['name'],
-                $product['price'],
-                $product['category']
-            );
+            $line = array();
+            foreach ($product as $key => $value) {
+                $line[] = $product[$key];
+            }
+            $lines[] = $line;
         }
 
         $fp = fopen('php://temp', 'r+');
@@ -27,9 +32,8 @@ class CsvFeeder implements Feeder {
 
         return $csv;
     }
-    public function getType() {
+    public function getType()
+    {
         return "csv";
     }
 }
-
-?>
