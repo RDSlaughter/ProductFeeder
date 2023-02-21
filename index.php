@@ -15,29 +15,3 @@ $productFeed = $feeder->getFeed($productData);
 $output = "./response/" . $platformName . "." . $fileExtension;
 file_put_contents($output, $productFeed);
 echo "\n" . $productFeed . "\nYola kaydedildi: " . $output;
-
-//$productData = json_decode(file_get_contents('data/products.json'), true);
-
-/*
-$feedManager = new FeedManager(new CsvFeeder());
-$csvFeed = $feedManager->getFeeder()->getFeed($productData);
-header("Content-type: text/csv");
-echo $csvFeed;
-*/
-
-
-/*
-$feedManager = new FeedManager(new XmlFeeder());
-$xmlFeed = $feedManager->getFeeder()->getFeed($productData);
-header('Content-Type: text/xml');
-echo $xmlFeed;
-*/
-
-/*
-//$feedManager = new FeedManager(new JsonFeeder());
-$feedManager = new FeedManager("JsonFeeder");
-$jsonFeed = $feedManager->getFeeder()->getFeed($productData);
-header('Content-Type: application/json; charset=utf-8');
-echo $jsonFeed;
-
-*/
