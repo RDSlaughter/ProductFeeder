@@ -1,6 +1,6 @@
 <?php
 
-require_once 'classes/FeedManager.php';
+require_once "classes/Platform.php";
 
 $options = getopt("p:f:");
 $platformName = ucfirst(strtolower($options['p'])) ?? "Google";
@@ -22,13 +22,19 @@ switch ($platformName) {
         die("Platform bulunamadı: $platformName!");
 }
 
-$fileExtension = $feedManager->getFeeder()->getType();
-$productFeed = $feedManager->getFeeder()->getFeed($productData);
+$platform = new Platform($platformName);
+
+$feeder = $platform->generateFeeder();
+
+$fileExtension = $feeder->getType();
+
+$productFeed = $feeder->getFeed($productData);
+
 $output = "./response/".$platformName.".".$fileExtension;
 
 file_put_contents($output, $productFeed);
-echo "\n".$productFeed."\nYola kaydedildi: ".$output;
 
+echo "\n".$productFeed."\nYola kaydedildi: ".$output;
 
 //$productData = json_decode(file_get_contents('data/products.json'), true);
 
